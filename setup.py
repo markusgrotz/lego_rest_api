@@ -10,7 +10,7 @@ setup(
     description="python stuff for a practical course",
     author="Markus Grotz",
     author_email="markus.grotz@kit.edu",
-    url="http://gitlab.com/markusgrotz/lego_rest_api",
+    url="http://github.com/markusgrotz/lego_rest_api",
     install_requires=reqs,
     packages=find_packages(exclude=["tests"])
 )
