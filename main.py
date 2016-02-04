@@ -49,13 +49,12 @@ def auth_func(*args, **kwargs):
 def main():
     logging.basicConfig(level=logging.DEBUG)
 
-    api_manager = APIManager(app, flask_sqlalchemy_db=db, preprocessors=dict(POST=[auth_func]))
-
-    # url_prefix = '/api'
-    api_manager.create_api(Race, methods=['GET'])
-    api_manager.create_api(Checkpoint, methods=['GET'])
-    api_manager.create_api(User, methods=['GET'], include_columns=['username'])
-    api_manager.create_api(CheckpointTime, methods=['GET', 'POST'])
+    with app.app_context():
+        api_manager = APIManager(app, flask_sqlalchemy_db=db, preprocessors=dict(POST=[auth_func]))
+        api_manager.create_api(Race, methods=['GET'])
+        api_manager.create_api(Checkpoint, methods=['GET'])
+        api_manager.create_api(User, methods=['GET'], include_columns=['username'])
+        api_manager.create_api(CheckpointTime, methods=['GET', 'POST'])
 
     app.run()
 
