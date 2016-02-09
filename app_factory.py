@@ -5,7 +5,7 @@ from flask.ext.login import LoginManager, current_user
 from flask.ext.restless import APIManager, ProcessingException
 
 from db_model import db
-from db_model import User, Race, Checkpoint, CheckpointTime
+from db_model import User, Race, Checkpoint, CheckpointTime, Marker
 
 
 def auth_func(*args, **kwargs):
@@ -24,9 +24,10 @@ def create_app():
     login_manager = LoginManager()
 
     api_manager = APIManager()
-    api_manager.create_api(Race, methods=['GET'])
+    api_manager.create_api(Race, methods=['GET'], include_columns=['start_time'])
     api_manager.create_api(Checkpoint, methods=['GET'])
     api_manager.create_api(User, methods=['GET'], include_columns=['username'])
+    api_manager.create_api(Marker, methods=['GET', 'PATCH'])
     api_manager.create_api(CheckpointTime, collection_name='time',
                            methods=['GET', 'POST', 'PUT'],
                            preprocessors=dict(POST=[auth_func]))

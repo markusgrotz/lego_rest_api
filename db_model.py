@@ -51,6 +51,15 @@ class User(db.Model, UserMixin):
         return '<User %r>' % self.username
 
 
+class Marker(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    x = db.Column(db.Float)
+    y = db.Column(db.Float)
+    heading = db.Column(db.Float)
+
+
 class CheckpointTime(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
